@@ -1,13 +1,13 @@
 import { FC, useState, useContext, useEffect } from 'react'
 import PropTypes from 'prop-types';
-import { useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './ProductCard.scss';
 import { CartContext } from '../../context/CartProvider';
 import { CartContextType, IStyleVisible, PropsCard } from '../../interfaces/interfaces';
 
 const ProductCard: FC<PropsCard> = ({ _id, name, price, imageUrl }) => {
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const [style, setStyle] = useState<IStyleVisible>({ display: 'none' });
     const [quantity, setQuantity] = useState<number>(0);
     const { addItemToCart, removeItemFromCart, cartItems } = useContext(CartContext) as CartContextType;
@@ -25,7 +25,7 @@ const ProductCard: FC<PropsCard> = ({ _id, name, price, imageUrl }) => {
             {
                 method: 'DELETE'
             }
-        ).then(res=> {
+        ).then(res => {
             navigate('/')
         })
     }
@@ -61,10 +61,10 @@ const ProductCard: FC<PropsCard> = ({ _id, name, price, imageUrl }) => {
                         <button className='cart-btn ' onClick={() => removeItemFromCart({ _id, name, price, imageUrl })}>-</button>
                     }
                 </div>
-                <button
+                {/* <button
                     onClick={() => deleteItem(_id)}
                     className='delete-btn '
-                >Delete</button>
+                >Delete</button> */}
             </div>
             <div className='product_data'>
                 <span className='product_name'>{name}</span>

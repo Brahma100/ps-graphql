@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC, useContext } from "react";
 import { LOGIN_USER } from "../../gqloperations/mutations";
-import { SIGNUP_USER } from '../gqloperations/mutations';
+import { SIGNUP_USER } from '../../gqloperations/mutations';
 import { useMutation } from '@apollo/client';
 import {
   Container,
@@ -13,16 +13,19 @@ import {
   Title,
 } from "./auth.style";
 import { useNavigate } from "react-router";
+import { ProductContext } from "../../context/ProductProvider";
 
-function Auth() {
+const Auth=()=> {
+  const { setToken} = useContext(ProductContext);
   const navigate = useNavigate()
-  const [signupUser, { data, loading, error }] = useMutation(SIGNUP_USER)
-  // const [signinUser, { error, loading, data }] = useMutation(LOGIN_USER, {
-  //   onCompleted(data) {
-  //     localStorage.setItem("token", data.user.token)
-  //     navigate('/')
-  //   }
-  // })
+  const [signupUser] = useMutation(SIGNUP_USER)
+  const [signinUser, { error, loading, data }] = useMutation(LOGIN_USER, {
+    onCompleted(data) {
+      localStorage.setItem("token", data.user.token)
+      setToken(data.user.token)
+      navigate('/')
+    }
+  })
   const initialValues = { name: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -38,16 +41,17 @@ function Auth() {
     e.preventDefault();
     setFormErrors(validate(formValues));
     if (Object.entries(formErrors).length === 0) {
+      !isLogin?
       signupUser({
         variables: {
           userNew: formValues
         }
+      }):
+      signinUser({
+        variables: {
+          userSignin: { email: formValues.email, password: formValues.password }
+        }
       })
-      // signinUser({
-      //   variables: {
-      //     userSignin: { email: formValues.email, password: formValues.password }
-      //   }
-      // })
     }
   };
   const handleClear = () => {

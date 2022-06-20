@@ -21,7 +21,9 @@ export type CartContextType = {
     cartCount: number;
 }
 export type ProductContextType = {
+    token: string;
     setPageNo: (page: number) => void;
+    setToken: (token:string) => void;
     products: IProduct[];
     pageNo: number | string;
     totalItems: number;
