@@ -1,0 +1,26 @@
+.nav{
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.nav ul{
+  display: flex; 
+  list-style: none;
+  margin-right: 10px;
+  align-items: center;
+}
+.nav ul li a{
+  color: #000;
+  text-decoration: none;
+  /* outline: none; */
+  margin: 0px 20px;
+}
+.nav ul li a:hover{
+  border-bottom: 2px solid rgba(0,0,0,0.5);
+}
+.logo{
+  margin-left: 240px;
+  margin-right: auto !important;
+  font-weight: bold;
+  font-size: 25px;
+  flex: 1;
+  display: inline;
+}

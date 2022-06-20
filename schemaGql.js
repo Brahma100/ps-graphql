@@ -9,6 +9,7 @@ const typeDefs = gql`
  }
 
  type ItemWithName{
+    _id:ID!
      name:String
      imageUrl:String
      price:Int

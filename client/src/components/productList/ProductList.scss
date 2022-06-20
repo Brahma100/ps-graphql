@@ -1,0 +1,30 @@
+.container {
+    // margin-bottom: 30px;
+margin:10px 0px 30px 0px;
+    article {
+        h1 {
+            text-align: center;
+        }
+
+        .product-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .product-wrapper {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: 25px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .product-wrapper {
+                display: flex;
+                flex-direction: column
+            }
+        }
+    }
+}
